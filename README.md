@@ -27,18 +27,18 @@ in real time, and exposes Prometheus metrics.
 ### Order lifecycle (state machine)
 
 ```
-            ┌─────────┐   no courier    ┌────────┐
- POST ────▶ │ PENDING │ ───────────────▶│ QUEUED │
-            └────┬────┘                 └───┬────┘
-                 │ courier found            │ courier frees up
-                 ▼                          │
-            ┌──────────┐ ◀──────────────────┘
+            ┌─────────┐   no courier   ┌────────┐
+ POST ────▶ │ PENDING │ ──────────────▶│ QUEUED │
+            └────┬────┘                └───┬────┘
+                 │ courier found           │ courier frees up
+                 ▼                         │
+            ┌──────────┐ ◀─────────────────┘
             │ ASSIGNED │
             └────┬─────┘
                  ▼
-          ┌────────────┐        ┌───────────┐
-          │ PICKED_UP  │ ─────▶ │ DELIVERED │   (terminal)
-          └────────────┘        └───────────┘
+          ┌───────────┐        ┌───────────┐
+          │ PICKED_UP │ ─────▶ │ DELIVERED │   (terminal)
+          └───────────┘        └───────────┘
 
  Any non-terminal state ─────▶ CANCELLED            (terminal)
 ```
